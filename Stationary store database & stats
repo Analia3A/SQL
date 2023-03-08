@@ -1,0 +1,34 @@
+--Create a stationary store database
+
+CREATE TABLE stationary (id INTEGER PRIMARY KEY, name TEXT, quantity INTEGER, colour TEXT, price INTEGER);
+
+INSERT INTO stationary VALUES (1, "daily planner", 10, "green", 12);
+INSERT INTO stationary VALUES (2, "To do list", 5, "multicolor", 6);
+INSERT INTO stationary VALUES (3, "Wedding planner", 4, "gold and white", 20);
+INSERT INTO stationary VALUES (4, "Wellness notebook", 3, "light brown",  12);
+INSERT INTO stationary VALUES (5, "To watch list", 5,"blue", 4);
+INSERT INTO stationary VALUES (6, "Study planner", 10, "pink, blue and purple", 15);
+INSERT INTO stationary VALUES (7, "Teacher planner", 2, "multicolor", 20);
+INSERT INTO stationary VALUES (8, "Budget", 2, "red and white", 5);
+INSERT INTO stationary VALUES (9, "Gel pens", 10, "Fucsia and purple", 4);
+INSERT INTO stationary VALUES (10, "Pencils",10, "black", 2);
+INSERT INTO stationary VALUES (11, "A4 notebook", 15, "White", 5);
+INSERT INTO stationary VAlUES (12, "A5 notebook", 7, "White", 3);
+INSERT INTO stationary VALUES (13, "Rubber", 10, "white", 1);
+INSERT INTO stationary VALUES (14, "Ruler", 10, "green", 2);
+INSERT INTO stationary VALUES (15, "Sharpener", 5, "grey", 1);
+
+--Display all the itmes in the table
+SELECT * FROM stationary;
+
+--Display all the itmes ordered by price in ascending order
+SELECT * FROM stationary ORDER BY price asc;
+
+--What's the total amount of items in the store?
+SELECT SUM(quantity) FROM stationary;
+
+--What's the total price if a customer buys one unit of each product?
+SELECT SUM(price) FROM stationary;
+
+--What's the average price of the products?
+SELECT AVG (price) FROM stationary;
