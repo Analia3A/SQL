@@ -1,3 +1,5 @@
+--Design a store database: 
+
 CREATE TABLE flowers(id INTEGER PRIMARY KEY, name TEXT, colour TEXT, origin TEXT, quantity INTEGER, price INTEGER);
 INSERT INTO flowers VALUES (1, "Peony", 'pink', 'China', 5, 15);
 INSERT INTO flowers VALUES (2, "Rose", 'red', 'Colombia', 20, 5);
@@ -18,16 +20,25 @@ INSERT INTO flowers VALUES (15, 'Sunflower', 'yellow', 'UK', 59, 3);
 --Select everything from the table called flowers:
 SELECT * from flowers;
 
-SELECT distinct name, price FROM flowers order by name asc;
+--Display the items in aplhabetical orders based on the column name:
+SELECT name FROM flowers ORDER BY name ASC;
 
+--Use of agregate functions:
+
+--SUM(): show the total quantity of products in the table:
 SELECT SUM(quantity) FROM flowers;
 
+--MAX(): show the highest price in the table:
 SELECT MAX(price) FROM flowers;
 
+--MIN(): show the lowest price in the table:
 SELECT MIN(price) FROM flowers;
 
-Select name from flowers where price <3;
+--Show the flowers which price is less than €3:
+SELECT name FROM flowers WHERE price <3;
 
-SELECT name, max(price) from flowers;
+--Show the name and the price of the item with the highest price in the table:
+SELECT name, MAX(price) FROM flowers;
 
+--Show the name and the price of the item with the lowest price in the table:
 SELECT name, min(price) from flowers;
