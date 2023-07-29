@@ -15,6 +15,7 @@ INSERT INTO flowers VALUES (13, 'Anemone', 'light pink', "Monaco", 7, 12);
 INSERT INTO flowers VALUES (14, 'Poppy', 'red', "Ireland", 45, 2);
 INSERT INTO flowers VALUES (15, 'Sunflower', 'yellow', 'UK', 59, 3);
 
+--Select everything from the table called flowers:
 SELECT * from flowers;
 
 SELECT distinct name, price FROM flowers order by name asc;
