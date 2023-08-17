@@ -1,0 +1,86 @@
+-- Customer & Order Analytics Project
+
+# In this porject I'm executing a SQL query to gather statistics on customer and order data from a database that contains multiple tables.
+
+
+-- 1.How many orders were placed in January?
+
+SELECT COUNT(orderID)
+FROM BIT_DB.JanSales
+WHERE orderID IS NOT NULL 
+AND orderID <>'';
+
+
+-- 2. How many of those orders were for an iPhone?
+SELECT COUNT(orderID)
+FROM JanSales
+WHERE Product = 'iPhone'
+AND Product IS NOT NULL
+AND Product <> '';
+
+
+-- 3. Select the customer account numbers for all the orders that were placed in February.
+
+#Inspecting the tables first
+SELECT *
+FROM customers;
+
+SELECT *
+FROM FebSales;
+
+
+SELECT DISTINCT c.acctnum
+FROM customers c
+JOIN FebSales f
+ON c.order_id = f.orderID
+AND Product IS NOT NULL
+AND Product <> '';
+
+
+-- 4.Which product was the cheapest one sold in January, and what was the price?
+SELECT DISTINCT Product, MIN(price)
+FROM JanSales;
+
+# OR
+
+SELECT DISTINCT Product, price 
+FROM JanSales
+WHERE price IN(SELECT MIN(price)
+FROM JanSales)
+GROUP BY Product;
+
+-- 5. What is the total revenue for each product sold in January? (Revenue can be calculated using the number of products sold and the price of the products).
+
+SELECT * FROM JanSales;
+
+
+SELECT Product, 
+       SUM(Quantity)*price AS total_revenue
+FROM JanSales
+GROUP BY Product
+ORDER BY price ASC;
+
+-- 6. Which products were sold in February at 548 Lincoln St, Seattle, WA 98101, how many of each were sold, and what was the total revenue?
+
+SELECT * FROM FebSales;
+
+
+SELECT Product,
+       SUM(Quantity) AS total_sold,
+       SUM(Quantity)*price AS total_revenue
+FROM FebSales
+WHERE location = '548 Lincoln St, Seattle, WA 98101'
+GROUP BY Product;
+
+-- 7. How many customers ordered more than 2 products at a time in February, and what was the average amount spent for those customers?
+
+
+
+SELECT COUNT(DISTINCT c.acctnum), 
+       AVG(f.quantity*price)
+FROM FebSales f
+LEFT JOIN customers c
+ON f.orderID = c.order_id 
+WHERE f.Quantity > 2
+AND length (orderID) = 6
+AND orderID <> 'Order ID';
