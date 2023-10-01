@@ -1,0 +1,95 @@
+-- Data used in this project is stored in the follwoing table Superstore:
+
+CREATE TABLE superstore (
+    item_id INTEGER PRIMARY KEY,
+    item_name TEXT,
+    category TEXT,
+    price DECIMAL(10, 2),
+    stock_quantity INTEGER,
+    average_rating DECIMAL(3, 2)
+);
+
+INSERT INTO superstore (item_id, item_name, category, price, stock_quantity, average_rating)
+VALUES
+    (1, 'Stainless Steel Cookware Set', 'Kitchen Supplies', 89.99, 50, 4.6),
+    (2, 'Memory Foam Mattress', 'Furnishings', 499.99, 30, 4.8),
+    (3, 'Smart LED TV', 'Electronics', 549.00, 20, 4.5),
+    (4, 'Robot Vacuum Cleaner', 'Appliances', 199.50, 40, 4.3),
+    (5, 'Wireless Bluetooth Speaker', 'Electronics', 39.99, 60, 4.2),
+    (6, 'Non-Stick Baking Set', 'Kitchen Supplies', 29.95, 80, 4.4),
+    (7, 'Cotton Bedding Set', 'Furnishings', 89.00, 25, 4.7),
+    (8, 'Smart Home Security Camera', 'Electronics', 79.95, 15, 4.1),
+    (9, 'Air Purifier', 'Appliances', 129.50, 35, 4.6),
+    (10, 'Premium Coffee Maker', 'Kitchen Supplies', 79.99, 50, 4.9),
+    (11, 'Ergonomic Office Chair', 'Furnishings', 189.00, 20, 4.5),
+    (12, 'Wireless Earbuds', 'Electronics', 49.99, 75, 4.3),
+    (13, 'Slow Cooker', 'Appliances', 49.95, 30, 4.7),
+    (14, 'Cutlery Set', 'Kitchen Supplies', 34.50, 40, 4.4),
+    (15, 'Cozy Throw Blanket', 'Furnishings', 24.99, 100, 4.2);
+
+
+-- Queries to the Superstore table:
+
+# SELECT statement to order the items by price in ascending order.
+
+SELECT * 
+FROM superstore
+ORDER BY price ASC;
+
+
+# Show statistics about the items' price.
+
+# a) The most expensive product in the list.
+SELECT MAX(price), item_name
+FROM superstore;
+
+# b) The cheapest product price in the list.
+SELECT MIN(price), item_name
+FROM superstore;
+
+# c) To find out what's the total price of all the items
+SELECT SUM(price)
+FROM superstore;
+
+# d) Average price of the products in the list
+SELECT AVG(price)
+FROM superstore;
+
+# e) Find out how many different items are in the list
+SELECT COUNT(item_id)
+FROM superstore;
+
+
+# Ordering all the items in the entire list according to their rating. 
+
+# To order the products according to the rating
+SELECT item_name, average_rating 
+FROM superstore
+ORDER BY average_rating ASC;
+
+
+
+# Retrieving all the items' names and prices from the Kitchen Supplies category and ordering them by price in descending order.
+
+SELECT item_name, price 
+FROM superstore
+WHERE category = "Kitchen Supplies"
+ORDER BY price DESC;
+
+
+# Show satistics about the products in the category Kitchen Supplies.
+
+# a) Average rating of all the products.
+SELECT AVG(average_rating)
+FROM superstore
+WHERE category = "Kitchen Supplies";
+
+# b) Show the most expensive, less expensive and the average price of the items.
+SELECT MAX(price), MIN(price), AVG(price)
+FROM superstore
+WHERE category = "Kitchen Supplies";
+
+# c) To count the amount of items in the list that belong to the category Kitchen Supplies.
+SELECT COUNT(*)
+FROM superstore
+WHERE category = "Kitchen Supplies";
