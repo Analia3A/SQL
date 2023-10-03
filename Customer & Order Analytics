@@ -7,16 +7,16 @@
 
 SELECT COUNT(orderID)
 FROM BIT_DB.JanSales
-WHERE orderID IS NOT NULL 
-AND orderID <>'';
+WHERE length(orderID)=6  
+AND orderID <>'Order ID';
 
 
 -- 2. How many of those orders were for an iPhone?
 SELECT COUNT(orderID)
-FROM JanSales
+FROM BIT_DB.JanSales
 WHERE Product = 'iPhone'
-AND Product IS NOT NULL
-AND Product <> '';
+AND length(orderID)=6 
+AND orderID <> 'Order ID';
 
 
 -- 3. Select the customer account numbers for all the orders that were placed in February.
@@ -31,23 +31,25 @@ FROM FebSales;
 
 SELECT DISTINCT c.acctnum
 FROM customers c
-JOIN FebSales f
+INNER JOIN FebSales f
 ON c.order_id = f.orderID
-AND Product IS NOT NULL
-AND Product <> '';
+WHERE length(order_id)=6
+AND order_id <> 'Order ID';
 
 
 -- 4.Which product was the cheapest one sold in January, and what was the price?
 SELECT DISTINCT Product, MIN(price)
-FROM JanSales;
+FROM JanSales
+GROUP BY Product
+ORDER BY price ASC
+LIMIT 1;
 
 # OR
 
 SELECT DISTINCT Product, price 
 FROM JanSales
 WHERE price IN(SELECT MIN(price)
-FROM JanSales)
-GROUP BY Product;
+FROM JanSales);
 
 -- 5. What is the total revenue for each product sold in January? (Revenue can be calculated using the number of products sold and the price of the products).
 
