@@ -76,8 +76,6 @@ GROUP BY Product;
 
 -- 7. How many customers ordered more than 2 products at a time in February, and what was the average amount spent for those customers?
 
-
-
 SELECT COUNT(DISTINCT c.acctnum), 
        AVG(f.quantity*price)
 FROM FebSales f
@@ -93,3 +91,4 @@ SELECT DISTINCT Product,
 FROM FebSales
 WHERE location LIKE '%Los Angeles%'
 GROUP BY Product;
+
